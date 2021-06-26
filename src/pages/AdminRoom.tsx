@@ -98,11 +98,11 @@ export function AdminRoom() {
                                         <>
                                             <button
                                                 type="button"
-                                                data-tip="Respondida"
+                                                data-tip="Concluir"
                                                 data-for="tooltip-question-admin"
                                                 onClick={() => handleCheckQuestionAsAnswered(question.id)}
                                             >
-                                                <img src={checkImg} alt="Marcar pergunta como respondida" />
+                                                <img src={checkImg} alt="Marcar pergunta como concluída" />
                                             </button>
                                             <button
                                                 type="button"
