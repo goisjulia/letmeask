@@ -2,7 +2,7 @@
     height: 50px;
     border-radius: 8px;
     font-weight: 500;
-    background: #835afd;
+    background: linear-gradient(90deg, rgba(131, 90, 253, 1) 0%, rgba(227, 89, 249, 1) 100%);
     color: #fff;
     padding: 0 32px;
     display: flex;
@@ -11,20 +11,27 @@
     cursor: pointer;
     border: 0;
 
-    transition: filter 0.2s;
+    background-size: 200%;
+    transition: background 0.5s ease-out;
 
     img {
         margin-right: 8px;
     }
 
     &.outlined {
-        background: #fff;
+        background: rgba(131, 90, 253, 0.2);
         border: 1px solid #835afd;
         color: #835afd;
+
+        &:hover {
+            background: #835afd;
+            color: #fff;
+        }
     }
 
     &:not(:disabled):hover {
-        filter: brightness(0.9);
+        // filter: brightness(0.9);
+        background-position: 50%;
     }
 
     &:disabled {

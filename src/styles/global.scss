@@ -9,6 +9,13 @@ body {
     color: #29292e;
 }
 
-body, input, button, textarea {
-    font: 400 16px 'Roboto', sans-serif;
+body,
+input,
+button,
+textarea {
+    font: 400 16px "Roboto", sans-serif;
+}
+
+button:active {
+    transform: translate(1px, 1px) !important;
 }

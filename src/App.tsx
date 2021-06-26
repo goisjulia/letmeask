@@ -6,6 +6,7 @@ import { AdminRoom } from "./pages/AdminRoom";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { AuthContextProvider } from './contexts/AuthContext';
+import './styles/global.scss';
 
 function App() {
   return (

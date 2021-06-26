@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import logoImg from '../assets/images/logo.svg';
 import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
@@ -8,6 +8,7 @@ import { useRoom } from '../hooks/useRoom';
 import deleteImg from '../assets/images/delete.svg';
 import '../styles/room.scss';
 import { database } from '../services/firebase';
+import React from 'react';
 
 type RoomParams = {
     id: string;
@@ -37,7 +38,9 @@ export function AdminRoom() {
         <div id="page-room">
             <header>
                 <div className="content">
-                    <img src={logoImg} alt="Let Me Ask" />
+                    <Link to="/">
+                        <img src={logoImg} alt="Let Me Ask" />
+                    </Link>
                     <div>
                         <RoomCode code={roomId} />
                         <Button
@@ -48,6 +51,8 @@ export function AdminRoom() {
                         </Button>
                     </div>
                 </div>
+                <div className="footer" />
+
             </header>
             <main>
                 <div className="room-title">

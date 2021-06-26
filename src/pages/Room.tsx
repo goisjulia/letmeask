@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import logoImg from '../assets/images/logo.svg';
 import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
@@ -61,9 +61,12 @@ export function Room() {
         <div id="page-room">
             <header>
                 <div className="content">
-                    <img src={logoImg} alt="Let Me Ask" />
+                    <Link to="/">
+                        <img src={logoImg} alt="Let Me Ask" />
+                    </Link>
                     <RoomCode code={roomId} />
                 </div>
+                <div className="footer" />
             </header>
             <main>
                 <div className="room-title">
@@ -73,7 +76,7 @@ export function Room() {
 
                 <form onSubmit={handleSendQuestion}>
                     <textarea
-                        placeholder="O que você quer perguntar?"
+                        placeholder="O que você quer perguntar? 🤔"
                         onChange={event => setNewQuestion(event.target.value)}
                         value={newQuestion}
                     />
