@@ -3,14 +3,16 @@
     border-radius: 8px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     padding: 24px;
+    transition: ease-in-out 0.2s background;
 
     & + .question {
-        margin-top: 8px;
+        margin-top: 12px;
     }
 
     &.highlighted {
-        background: #f4f0ff;
         border: 1px solid #835afd;
+        background: rgba(130, 88, 253, 0.2);
+        background: linear-gradient(90deg, rgba(80, 92, 255, 0.15) 0%, rgba(227, 89, 249, 0.15) 100%);
 
         footer .user-info span {
             color: #29292e;
@@ -48,7 +50,7 @@
                 border-radius: 50%;
             }
 
-            span {
+            > span {
                 margin-left: 8px;
                 color: #737380;
                 font-size: 14px;
@@ -58,6 +60,16 @@
         > div {
             display: flex;
             gap: 16px;
+
+            .label {
+                margin-left: 16px;
+                background: linear-gradient(90deg, rgba(131, 90, 253, 0.8) 0%, rgba(227, 89, 249, 0.8) 100%);
+                border-radius: 9999px;
+                padding: 8px 16px;
+                color: #fff;
+                font-weight: 500;
+                font-size: 14px;
+            }
         }
 
         button {
@@ -74,15 +86,17 @@
 
                 &.liked {
                     color: #835afd;
+                    font-weight: 700;
 
                     svg path {
                         stroke: #835afd;
+                        stroke-width: 2.5px;
                     }
                 }
             }
 
             &:hover {
-                filter: brightness(0.7);
+                transform: scale(1.13);
             }
         }
     }

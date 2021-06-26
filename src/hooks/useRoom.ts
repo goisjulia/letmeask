@@ -53,8 +53,30 @@ export function useRoom(roomId: string) {
                 }
             });
 
+            const highlithedQuestions = parsedQuestions.filter(question => question.isHighlighted);
+            const unsetQuestions = parsedQuestions.filter(question => !question.isHighlighted && !question.isAnswered);
+            const unsetQuestionsWithoutLikes = unsetQuestions.filter(question => question.likeCount === 0);
+            let unsetQuestionsWithLikes = unsetQuestions.filter(question => question.likeCount !== 0);
+            const answeredQuestions = parsedQuestions.filter(question => question.isAnswered);
+
+            console.log(unsetQuestionsWithLikes);
+
+            unsetQuestionsWithLikes.sort(function (x, y) {
+                const res =  (x.likeCount < y.likeCount) ? 0 : x.likeCount ? -1 : 1;
+                console.log(x);
+                console.log(y);
+                console.log(res);
+                return res;
+            });
+
+            console.log(unsetQuestionsWithLikes);
+
+            const sortedQuestions = highlithedQuestions.concat(unsetQuestionsWithLikes).concat(unsetQuestionsWithoutLikes).concat(answeredQuestions);
+
+            console.log(sortedQuestions);
+
             setTitle(databaseRoom.title);
-            setQuestions(parsedQuestions);
+            setQuestions(sortedQuestions);
         });
 
         return () => { roomRef.off('value') }
