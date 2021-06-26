@@ -10,6 +10,7 @@ import { useRoom } from '../hooks/useRoom';
 import { database } from '../services/firebase';
 
 import '../styles/room.scss';
+import ReactTooltip from 'react-tooltip';
 
 type RoomParams = {
     id: string;
@@ -118,6 +119,8 @@ export function Room() {
                                             type="button"
                                             aria-label="Marcar como gostei"
                                             onClick={() => handleLikeQuestion(question.id, question.likeId)}
+                                            data-tip="Curtir"
+                                            data-for="tooltip-question"
                                         >
                                             {question.likeCount > 0 && <span>{question.likeCount}</span>}
 
@@ -126,6 +129,9 @@ export function Room() {
                                             </svg>
                                         </button>
                                     )}
+
+                                    <ReactTooltip id="tooltip-question" place="bottom" type="dark" effect="solid"/>
+
                                 </Question>
                             );
                         })) : (

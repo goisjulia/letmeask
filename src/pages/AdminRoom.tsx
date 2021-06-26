@@ -11,6 +11,7 @@ import deleteImg from '../assets/images/delete.svg';
 import emptyQuestionsImg from '../assets/images/empty-questions.svg';
 import '../styles/room.scss';
 import { database } from '../services/firebase';
+import ReactTooltip from 'react-tooltip';
 
 type RoomParams = {
     id: string;
@@ -97,12 +98,16 @@ export function AdminRoom() {
                                         <>
                                             <button
                                                 type="button"
+                                                data-tip="Respondida"
+                                                data-for="tooltip-question-admin"
                                                 onClick={() => handleCheckQuestionAsAnswered(question.id)}
                                             >
                                                 <img src={checkImg} alt="Marcar pergunta como respondida" />
                                             </button>
                                             <button
                                                 type="button"
+                                                data-tip="Destacar"
+                                                data-for="tooltip-question-admin"
                                                 onClick={() => handleHighlightQuestion(question.id)}
                                             >
                                                 <img src={answerImg} alt="Dar destaque a pergunta" />
@@ -112,10 +117,14 @@ export function AdminRoom() {
 
                                     <button
                                         type="button"
+                                        data-tip="Remover"
+                                        data-for="tooltip-question-admin"
                                         onClick={() => handleDeleteQuestion(question.id)}
                                     >
                                         <img src={deleteImg} alt="Remover pergunta" />
                                     </button>
+
+                                    <ReactTooltip id="tooltip-question-admin" place="bottom" type="dark" effect="solid"/>
                                 </Question>
                             );
                         })

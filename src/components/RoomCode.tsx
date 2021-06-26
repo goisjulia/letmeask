@@ -1,3 +1,4 @@
+import ReactTooltip from 'react-tooltip';
 import CopyImg from '../assets/images/copy.svg';
 
 import '../styles/room-code.scss';
@@ -13,11 +14,20 @@ export function RoomCode(props: RoomCodeProps) {
     }
 
     return (
-        <button className="room-code" onClick={copyCopyRoomCodeToClipboard}>
-            <span>
-                Sala #{props.code}
-            </span>
+        <>
+            <button
+                className="room-code"
+                onClick={copyCopyRoomCodeToClipboard}
+                data-tip="Copiar"
+                data-for="tooltip-room-code"
+            >
+                <span>
+                    Sala #{props.code}
+                </span>
                 <img src={CopyImg} alt="Copy room code" />
-        </button>
+            </button>
+
+            <ReactTooltip id="tooltip-room-code" place="left" type="dark" effect="solid" />
+        </>
     )
 }
