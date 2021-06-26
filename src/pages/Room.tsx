@@ -16,11 +16,17 @@ type RoomParams = {
 }
 
 export function Room() {
-    const { user } = useAuth();
+    const { user, signInWithGoogle } = useAuth();
     const [newQuestion, setNewQuestion] = useState('');
     const params = useParams<RoomParams>();
     const roomId = params.id;
     const { title, questions } = useRoom(roomId);
+
+    async function handleLoginUser() {
+        if (!user) {
+            await signInWithGoogle();
+        }
+    }
 
     async function handleSendQuestion(event: FormEvent) {
         event.preventDefault();
@@ -89,7 +95,7 @@ export function Room() {
                                 <span>{user.name}</span>
                             </div>
                         ) : (
-                            <span>Para enviar uma pergunta, <button>faça o seu login</button>.</span>
+                            <span>Para enviar uma pergunta, <button onClick={handleLoginUser}>faça o seu login</button>.</span>
                         )}
                         <Button type="submit" disabled={!user || !newQuestion}>Enviar pergunta</Button>
                     </div>
@@ -126,7 +132,7 @@ export function Room() {
                         <div className="no-questions">
                             <img src={emptyQuestionsImg} alt="Ilustração com balões de fala" />
                             <span className="title">Nenhuma pergunta por aqui...</span>
-                            <span>Faça o seu login e seja a primeira pessoa a fazer uma pergunta!</span>
+                            <span>Seja a primeira pessoa a fazer uma pergunta!</span>
                         </div>
                     )}
                 </div>

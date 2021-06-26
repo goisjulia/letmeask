@@ -59,8 +59,6 @@ export function useRoom(roomId: string) {
             let unsetQuestionsWithLikes = unsetQuestions.filter(question => question.likeCount !== 0);
             const answeredQuestions = parsedQuestions.filter(question => question.isAnswered);
 
-            console.log(unsetQuestionsWithLikes);
-
             unsetQuestionsWithLikes.sort(function (x, y) {
                 const res =  (x.likeCount < y.likeCount) ? 0 : x.likeCount ? -1 : 1;
                 console.log(x);
@@ -69,11 +67,7 @@ export function useRoom(roomId: string) {
                 return res;
             });
 
-            console.log(unsetQuestionsWithLikes);
-
             const sortedQuestions = highlithedQuestions.concat(unsetQuestionsWithLikes).concat(unsetQuestionsWithoutLikes).concat(answeredQuestions);
-
-            console.log(sortedQuestions);
 
             setTitle(databaseRoom.title);
             setQuestions(sortedQuestions);

@@ -123,7 +123,7 @@ export function AdminRoom() {
                         <div className="no-questions">
                             <img src={emptyQuestionsImg} alt="Ilustração com balões de fala" />
                             <span className="title">Nenhuma pergunta por aqui...</span>
-                            <span>Faça o seu login e seja a primeira pessoa a fazer uma pergunta!</span>
+                            <span>Envie o código desta sala para seus amigos e comece a responder perguntas!</span>
                         </div>
                     )}
                 </div>
