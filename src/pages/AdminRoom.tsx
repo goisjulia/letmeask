@@ -12,6 +12,7 @@ import emptyQuestionsImg from '../assets/images/empty-questions.svg';
 import '../styles/room.scss';
 import { database } from '../services/firebase';
 import ReactTooltip from 'react-tooltip';
+import toast from 'react-hot-toast';
 
 type RoomParams = {
     id: string;
@@ -28,6 +29,7 @@ export function AdminRoom() {
             endedAt: new Date(),
         });
 
+        toast.success('Sala encerrada com sucesso');
         history.push('/');
     }
 
@@ -37,6 +39,7 @@ export function AdminRoom() {
             isHighlighted: false,
         });
 
+        toast.success('Pergunta concluída com sucesso');
     }
 
     async function handleHighlightQuestion(questionId: string) {
@@ -48,6 +51,7 @@ export function AdminRoom() {
     async function handleDeleteQuestion(questionId: string) {
         if (window.confirm('Você tem certeza que deseja excluir essa pergunta?')) {
             await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
+            toast.success('Pergunta removida com sucesso');
         }
     }
 

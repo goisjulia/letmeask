@@ -11,6 +11,7 @@ import { database } from '../services/firebase';
 
 import '../styles/room.scss';
 import ReactTooltip from 'react-tooltip';
+import toast, { Toaster } from 'react-hot-toast';
 
 type RoomParams = {
     id: string;
@@ -37,7 +38,8 @@ export function Room() {
         }
 
         if (!user) {
-            throw new Error('You must be logged in')
+            toast.error('Usuário deve estar logado');
+            return;
         }
 
         const question = {
@@ -51,6 +53,8 @@ export function Room() {
         };
 
         await database.ref(`/rooms/${roomId}/questions`).push(question);
+
+        toast.success('Enviado com sucesso');
 
         setNewQuestion('');
     }
@@ -139,6 +143,10 @@ export function Room() {
                         </div>
                     )}
                 </div>
+
+                <Toaster
+                    position="bottom-center"
+                />
 
             </main>
         </div>

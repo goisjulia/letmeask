@@ -1,3 +1,4 @@
+import toast, { Toaster } from 'react-hot-toast';
 import ReactTooltip from 'react-tooltip';
 import CopyImg from '../assets/images/copy.svg';
 
@@ -9,15 +10,16 @@ type RoomCodeProps = {
 
 export function RoomCode(props: RoomCodeProps) {
 
-    function copyCopyRoomCodeToClipboard() {
+    function copyRoomCodeToClipboard() {
         navigator.clipboard.writeText(props.code);
+        toast.success('Copiado');
     }
 
     return (
         <>
             <button
                 className="room-code"
-                onClick={copyCopyRoomCodeToClipboard}
+                onClick={copyRoomCodeToClipboard}
                 data-tip="Copiar"
                 data-for="tooltip-room-code"
             >
@@ -26,6 +28,10 @@ export function RoomCode(props: RoomCodeProps) {
                 </span>
                 <img src={CopyImg} alt="Copy room code" />
             </button>
+
+            <Toaster
+                position="bottom-center"
+            />
 
             <ReactTooltip id="tooltip-room-code" place="left" type="dark" effect="solid" />
         </>

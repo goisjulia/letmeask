@@ -61,9 +61,6 @@ export function useRoom(roomId: string) {
 
             unsetQuestionsWithLikes.sort(function (x, y) {
                 const res =  (x.likeCount < y.likeCount) ? 0 : x.likeCount ? -1 : 1;
-                console.log(x);
-                console.log(y);
-                console.log(res);
                 return res;
             });
 
