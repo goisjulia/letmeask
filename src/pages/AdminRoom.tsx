@@ -90,8 +90,12 @@ export function AdminRoom() {
                                     isHighlighted={question.isHighlighted}
                                 >
                                     {question.likeCount > 0 && (
-                                        <span className="label">
-                                            {question.likeCount || ''} {question.likeCount === 1 ? (<> like </>) : (<> likes </>)}
+                                        <span
+                                            className="label"
+                                            data-tip="Curtidas"
+                                            data-for="tooltip-question-admin"
+                                        >
+                                            {question.likeCount > 0 && (<>👍</>)} {question.likeCount || ''}
                                         </span>
                                     )}
                                     {!question.isAnswered && (
@@ -124,7 +128,7 @@ export function AdminRoom() {
                                         <img src={deleteImg} alt="Remover pergunta" />
                                     </button>
 
-                                    <ReactTooltip id="tooltip-question-admin" place="bottom" type="dark" effect="solid"/>
+                                    <ReactTooltip id="tooltip-question-admin" place="bottom" type="dark" effect="solid" />
                                 </Question>
                             );
                         })
