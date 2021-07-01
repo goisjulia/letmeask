@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import '../styles/questions.scss';
 import cx from 'classnames';
+import ReactTooltip from 'react-tooltip';
 
 type QuestionProps = {
     content: string;
@@ -11,6 +12,7 @@ type QuestionProps = {
     children?: ReactNode;
     isAnswered: boolean;
     isHighlighted: boolean;
+    likeCount?: number;
 }
 
 export function Question({
@@ -18,6 +20,7 @@ export function Question({
     author,
     isAnswered = false,
     isHighlighted = false,
+    likeCount = 0,
     children,
 }: QuestionProps) {
     return (
@@ -27,7 +30,24 @@ export function Question({
                 { highlighted: isHighlighted && !isAnswered }
             )}
         >
-            <p>{content}</p>
+            <div className="content">
+                <span>{content}</span>
+
+                <div>
+                    {likeCount > 0 && (
+                        <span
+                            className="label"
+                            data-tip="Curtidas"
+                            data-for="tooltip-question-admin"
+                        >
+                            {likeCount > 0 && (<>👍</>)} {likeCount || ''}
+                        </span>
+                    )}
+                </div>
+            </div>
+
+            <ReactTooltip id="tooltip-question-admin" place="left" type="dark" effect="solid" />
+
             <footer>
                 <div className="user-info">
                     <img src={author.avatar} alt={author.name} />
@@ -37,6 +57,6 @@ export function Question({
                     {children}
                 </div>
             </footer>
-        </div>
+        </div >
     );
 }

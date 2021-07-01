@@ -19,3 +19,23 @@
         transform: scale(1.02);
     }
 }
+
+@media (max-width: 600px) {
+    .room-code {
+        border: none;
+        background: none;
+
+        &:active {
+            background: none;
+        }
+
+        span {
+            display: none;
+        }
+
+        img {
+            height: 30px;
+            display: block;
+        }
+    }
+}

@@ -20,13 +20,13 @@ export function RoomCode(props: RoomCodeProps) {
             <button
                 className="room-code"
                 onClick={copyRoomCodeToClipboard}
-                data-tip="Copiar"
+                data-tip="Copiar código da sala"
                 data-for="tooltip-room-code"
             >
                 <span>
                     Sala #{props.code}
                 </span>
-                <img src={CopyImg} alt="Copy room code" />
+                <img src={CopyImg} alt="Copiar código da sala" />
             </button>
 
             <Toaster

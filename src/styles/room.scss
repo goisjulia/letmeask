@@ -14,8 +14,13 @@
             justify-content: space-between;
             align-items: center;
 
-            a img {
-                max-height: 45px;
+            > button:first-child {
+                background: none;
+                border: none;
+
+                img {
+                    max-height: 50px;
+                }
             }
 
             > div {
@@ -24,6 +29,10 @@
 
                 button {
                     height: 40px;
+
+                    &#end-room img {
+                        display: none;
+                    }
                 }
             }
         }
@@ -39,6 +48,7 @@
     main {
         max-width: 800px;
         margin: 150px auto;
+        padding: 0 20px;
 
         .room-title {
             margin: 32px 0 24px;
@@ -155,6 +165,38 @@
 
             span {
                 color: #737380;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    #page-room {
+        header {
+            .content {
+                > div {
+                    button#end-room {
+                        border: none;
+                        background: none;
+                        padding: 5px;
+
+                        span {
+                            display: none;
+                        }
+
+                        img {
+                            height: 30px;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        main {
+            margin: 180px auto;
+
+            span {
+                text-align: center;
             }
         }
     }

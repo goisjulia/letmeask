@@ -144,3 +144,15 @@
         }
     }
 }
+
+@media (max-width: 1024px) {
+    #page-auth {
+        aside {
+            display: none;
+        }
+
+        main {
+            background: rgba(131, 90, 253, 0.1);
+        }
+    }
+}

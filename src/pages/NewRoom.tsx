@@ -50,7 +50,7 @@ export function NewRoom() {
                             onChange={event => setNewRoom(event.target.value)}
                             value={newRoom}
                         />
-                        <Button type="submit">
+                        <Button type="submit" disabled={!newRoom}>
                             Criar sala
                         </Button>
                     </form>

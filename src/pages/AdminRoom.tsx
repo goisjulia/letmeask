@@ -1,7 +1,8 @@
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import logoImg from '../assets/images/logo.svg';
 import checkImg from '../assets/images/check.svg';
 import answerImg from '../assets/images/answer.svg';
+import cancelImg from '../assets/images/cancel.svg';
 import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
 import { Question } from '../components/Question';
@@ -11,7 +12,6 @@ import deleteImg from '../assets/images/delete.svg';
 import emptyQuestionsImg from '../assets/images/empty-questions.svg';
 import '../styles/room.scss';
 import { database } from '../services/firebase';
-import ReactTooltip from 'react-tooltip';
 import toast from 'react-hot-toast';
 
 type RoomParams = {
@@ -24,13 +24,21 @@ export function AdminRoom() {
     const roomId = params.id;
     const { title, questions } = useRoom(roomId);
 
-    async function handleEndRoom() {
-        await database.ref(`rooms/${roomId}`).update({
-            endedAt: new Date(),
-        });
+    async function handleGoToHome() {
+        if (window.confirm('Você realmente deseja sair da sala?')) {
+            history.push('/');
+        }
+    }
 
-        toast.success('Sala encerrada com sucesso');
-        history.push('/');
+    async function handleEndRoom() {
+        if (window.confirm('Você realmente deseja encerrar a sala?')) {
+            await database.ref(`rooms/${roomId}`).update({
+                endedAt: new Date(),
+            });
+
+            toast.success('Sala encerrada com sucesso');
+            history.push('/');
+        }
     }
 
     async function handleCheckQuestionAsAnswered(questionId: string) {
@@ -59,16 +67,20 @@ export function AdminRoom() {
         <div id="page-room">
             <header>
                 <div className="content">
-                    <Link to="/">
+                    <button onClick={handleGoToHome}>
                         <img src={logoImg} alt="Let Me Ask" />
-                    </Link>
+                    </button>
                     <div>
                         <RoomCode code={roomId} />
                         <Button
+                            id="end-room"
                             onClick={handleEndRoom}
                             isOutlined
                         >
-                            Encerrar sala
+                            <img src={cancelImg} alt="Encerrar sala" />
+                            <span>
+                                Encerrar sala
+                            </span>
                         </Button>
                     </div>
                 </div>
@@ -92,16 +104,8 @@ export function AdminRoom() {
                                     author={question.author}
                                     isAnswered={question.isAnswered}
                                     isHighlighted={question.isHighlighted}
+                                    likeCount={question.likeCount}
                                 >
-                                    {question.likeCount > 0 && (
-                                        <span
-                                            className="label"
-                                            data-tip="Curtidas"
-                                            data-for="tooltip-question-admin"
-                                        >
-                                            {question.likeCount > 0 && (<>👍</>)} {question.likeCount || ''}
-                                        </span>
-                                    )}
                                     {!question.isAnswered && (
                                         <>
                                             <button
@@ -132,7 +136,6 @@ export function AdminRoom() {
                                         <img src={deleteImg} alt="Remover pergunta" />
                                     </button>
 
-                                    <ReactTooltip id="tooltip-question-admin" place="bottom" type="dark" effect="solid" />
                                 </Question>
                             );
                         })

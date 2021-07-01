@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import logoImg from '../assets/images/logo.svg';
 import emptyQuestionsImg from '../assets/images/empty-questions.svg';
 import { Button } from '../components/Button';
@@ -18,11 +18,18 @@ type RoomParams = {
 }
 
 export function Room() {
+    const history = useHistory();
     const { user, signInWithGoogle } = useAuth();
     const [newQuestion, setNewQuestion] = useState('');
     const params = useParams<RoomParams>();
     const roomId = params.id;
     const { title, questions } = useRoom(roomId);
+
+    async function handleGoToHome() {
+        if (window.confirm('Você realmente deseja sair da sala?')) {
+            history.push('/');
+        }
+    }
 
     async function handleLoginUser() {
         if (!user) {
@@ -73,9 +80,9 @@ export function Room() {
         <div id="page-room">
             <header>
                 <div className="content">
-                    <Link to="/">
+                    <button onClick={handleGoToHome}>
                         <img src={logoImg} alt="Let Me Ask" />
-                    </Link>
+                    </button>
                     <RoomCode code={roomId} />
                 </div>
                 <div className="footer" />
